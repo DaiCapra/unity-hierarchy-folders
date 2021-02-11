@@ -26,10 +26,15 @@ namespace UnityHierarchyFolders.Editor
 
     public class FolderOnBuild : IProcessSceneWithReport
     {
+        public static bool Flatten = false;
         public int callbackOrder => 0;
 
         public void OnProcessScene(Scene scene, BuildReport report)
         {
+            if (!Flatten){
+                return;
+            }
+            
             foreach (var folder in Object.FindObjectsOfType<Folder>())
             {
                 folder.Flatten();
